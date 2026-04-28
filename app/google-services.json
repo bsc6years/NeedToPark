@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "282139492151",
+    "project_id": "parkingfinderv1",
+    "storage_bucket": "parkingfinderv1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282139492151:android:d444cd60a796586ba524b2",
+        "android_client_info": {
+          "package_name": "com.example.parkingfinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASBOQape6hbMu9_Jg94qx429fcAyR1glI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
