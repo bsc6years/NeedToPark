@@ -73,7 +73,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightColorScheme = lightColorScheme(
-    primary = BrandPrimary,
+    primary = BrandBlue,
     onPrimary = TextOnBrand,
 
     secondary = SurfaceMuted,
@@ -97,7 +97,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = BrandPrimary,
+    primary = BrandBlue,
     onPrimary = TextOnBrand,
 
     secondary = SurfaceMuted,

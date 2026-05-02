@@ -37,7 +37,7 @@ import kotlinx.coroutines.delay
 import androidx.compose.ui.text.style.TextAlign
 
 data class ActiveSessionUi(
-    //    val remainingTime: String, it requreid to compose the screen to update timer it didnt countdown live
+    //    val remainingTime: String, it requred to compose the screen to update timer it didnt countdown live
     val endTimeMillis: Long,
     val locationId: String,
     val spaceName: String,
@@ -92,7 +92,8 @@ fun SessionScreen(
             modifier = Modifier.fillMaxWidth(0.8f),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF6A4FB3)
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
             )
         ) {
             Text("Book a New Parking Session")
@@ -160,7 +161,8 @@ fun ActiveSessionCard(
                 onClick = onExtendClick,
                 shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6A4FB3)
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
                 Text("Extend")

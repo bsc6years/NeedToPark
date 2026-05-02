@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.parkingfinder.model.Vehicle
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
@@ -149,21 +150,32 @@ fun VehicleDetailsRoute(
     onBackClick: () -> Unit,
     onVehicleDeleted: () -> Unit
 ) {
+    val currentUser = FirebaseAuth.getInstance().currentUser
     val firestore = FirebaseFirestore.getInstance()
 
     var vehicle by remember { mutableStateOf<Vehicle?>(null) }
     var showDeleteDialog by remember { mutableStateOf(false) }
 
-    LaunchedEffect(vehicleId) {
+    LaunchedEffect(vehicleId, currentUser?.uid) {
+        val uid = currentUser?.uid ?: return@LaunchedEffect
+
         if (vehicleId.isBlank()) return@LaunchedEffect
 
         firestore.collection("vehicles")
             .document(vehicleId)
             .get()
             .addOnSuccessListener { document ->
-                vehicle = document.toObject(Vehicle::class.java)?.copy(id = document.id)
+                val loadedVehicle =
+                    document.toObject(Vehicle::class.java)?.copy(id = document.id)
+
+                vehicle = if (loadedVehicle?.userId == uid) {
+                    loadedVehicle
+                } else {
+                    null
+                }
             }
-            .addOnFailureListener {
+            .addOnFailureListener { exception ->
+                println("Failed to load vehicle: ${exception.message}")
                 vehicle = null
             }
     }
@@ -178,12 +190,22 @@ fun VehicleDetailsRoute(
             showDeleteDialog = false
         },
         onConfirmDelete = {
+            val uid = currentUser?.uid ?: return@VehicleDetailsScreen
+
+            if (vehicle?.userId != uid) {
+                println("Cannot delete vehicle: user does not own this vehicle")
+                return@VehicleDetailsScreen
+            }
+
             firestore.collection("vehicles")
                 .document(vehicleId)
                 .delete()
                 .addOnSuccessListener {
                     showDeleteDialog = false
                     onVehicleDeleted()
+                }
+                .addOnFailureListener { exception ->
+                    println("Failed to delete vehicle: ${exception.message}")
                 }
         }
     )

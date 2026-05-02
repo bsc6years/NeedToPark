@@ -38,6 +38,9 @@ import com.example.parkingfinder.util.isValidPassword
 import androidx.compose.material3.ButtonDefaults
 import com.example.parkingfinder.ui.theme.BrandBlue
 
+import com.example.parkingfinder.ui.theme.Success
+import com.example.parkingfinder.ui.theme.Warning
+
 
 fun isValidEmail(email: String): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -54,8 +57,8 @@ fun PasswordStrengthMeter(strength: PasswordStrength) {
 
     val color = when (strength) {
         PasswordStrength.WEAK -> MaterialTheme.colorScheme.error
-        PasswordStrength.MEDIUM -> MaterialTheme.colorScheme.tertiary
-        PasswordStrength.STRONG -> MaterialTheme.colorScheme.primary
+        PasswordStrength.MEDIUM -> Warning
+        PasswordStrength.STRONG -> Success
     }
 
     Column {
@@ -68,7 +71,7 @@ fun PasswordStrengthMeter(strength: PasswordStrength) {
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "Password strength: $text",
+            text = "Password Strength: $text",
             color = color,
             style = MaterialTheme.typography.bodySmall
         )
@@ -125,6 +128,7 @@ fun SignUpScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+/*
         // Top left link (Figma: "Sign In Instead")
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -137,8 +141,9 @@ fun SignUpScreen(
                 Text("Sign In Instead")
             }
         }
+*/
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(60.dp))
 
         // Big title + subtitle (Figma)
         Text(

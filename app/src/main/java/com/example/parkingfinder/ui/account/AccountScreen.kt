@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.parkingfinder.ui.theme.BrandBlue
 
 
 @Composable
@@ -57,6 +58,7 @@ fun AccountScreen(
                     text = "Need to Park",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
+                    color = BrandBlue,
                     style = MaterialTheme.typography.headlineMedium
                 )
 
@@ -131,7 +133,10 @@ fun AccountScreen(
                     .fillMaxWidth()
                     .height(52.dp),
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors()
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.30f),
+                    contentColor = MaterialTheme.colorScheme.onBackground
+                )
             ) {
                 Text(text = "Log Out")
             }

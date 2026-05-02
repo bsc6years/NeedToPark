@@ -43,7 +43,7 @@ fun BookingScreen(
 
     var selectedVehicle by remember { mutableStateOf<Vehicle?>(null) }
     var vehicles by remember { mutableStateOf<List<Vehicle>>(emptyList()) }
-    var durationMinutes by remember { mutableIntStateOf(60) }
+    var durationMinutes by remember { mutableIntStateOf(60) } // time is set to 60 mins
 
     val currentUser = FirebaseAuth.getInstance().currentUser
     val firestore = FirebaseFirestore.getInstance()

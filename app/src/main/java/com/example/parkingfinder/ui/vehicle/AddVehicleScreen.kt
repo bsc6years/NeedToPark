@@ -116,12 +116,12 @@ fun AddVehicleScreen(
             onClick = onConfirmClick,
             modifier = Modifier.fillMaxWidth(),
             enabled = isFormValid,
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = if (isFormValid) Color(0xFF6A4FB3) else Color(0xFFD9CBEF)
-            )
+            shape = RoundedCornerShape(12.dp)
         ) {
-            Text("Add Vehicle")
+            Text(
+                text = "Add Vehicle",
+                style = MaterialTheme.typography.labelLarge
+            )
         }
     }
 }
@@ -133,6 +133,7 @@ fun AddVehicleRoute(
     // Route/container composable.
     // This holds the input state and saves the vehicle to Firestore.
 
+    //gets current user that is logged in - needed for secure database rules
     val currentUser = FirebaseAuth.getInstance().currentUser
     val firestore = FirebaseFirestore.getInstance()
 
@@ -178,6 +179,11 @@ fun AddVehicleRoute(
                     // After saving successfully, go back to the Vehicles page.
                     onVehicleSaved()
                 }
+                // the below is good for debugging and will show error message is Firebase blocks any acctins
+                .addOnFailureListener { exception ->
+                    println("Failed to save vehicle: ${exception.message}")
+                }
+
         }
     )
 }

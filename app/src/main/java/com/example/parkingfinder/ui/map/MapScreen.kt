@@ -45,6 +45,10 @@ import com.example.parkingfinder.data.SettingsManager
 import com.google.android.gms.location.LocationServices
 
 import android.widget.Toast
+import androidx.compose.material3.ButtonDefaults
+
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.OutlinedTextFieldDefaults
 
 
 @Composable
@@ -165,21 +169,46 @@ fun MapScreen(
                             onSearchById("") // reset results
                         }
                     ) {
-                        Icon(Icons.Filled.Close, contentDescription = "Clear search")
+                        Icon(
+                            imageVector = Icons.Filled.Close,
+                            contentDescription = "Clear search",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
+                } else {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Search",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             },
-            placeholder = { Text("Enter Location ID") },
+            placeholder = {
+                Text(
+                    text = "Enter Location ID",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
             singleLine = true,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(24.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            colors = TextFieldDefaults.colors(
-                unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+
+                focusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f),
+                unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.60f),
+
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+
                 focusedPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
-                focusedIndicatorColor = MaterialTheme.colorScheme.primary
+                unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+
+                focusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unfocusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant
             )
         )
 

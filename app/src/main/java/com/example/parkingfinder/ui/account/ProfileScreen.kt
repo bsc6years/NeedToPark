@@ -37,6 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+import androidx.compose.material3.OutlinedTextFieldDefaults
+
 
 
 
@@ -54,6 +56,7 @@ fun ProfileScreen(
     var showUpdateNameSheet by remember { mutableStateOf(false) }
     var showNameUpdatedMessage by remember { mutableStateOf(false) }
     var currentNameState by remember(name) { mutableStateOf(name) }
+
 
     Column(
         modifier = Modifier

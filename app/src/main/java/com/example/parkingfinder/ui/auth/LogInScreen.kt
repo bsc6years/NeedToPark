@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.parkingfinder.ui.theme.BrandBlue
+import androidx.compose.foundation.BorderStroke
 
 @Composable
 fun LoginScreen(
@@ -170,10 +171,16 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        //register button
         Row(modifier = Modifier.fillMaxWidth()) {
             Button(
                 onClick = onGoToSignUp,
                 shape = RoundedCornerShape(8.dp),
+                //gives a border to the button as colour is too washed out
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline
+                ),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.secondary,
                     contentColor = MaterialTheme.colorScheme.onSecondary
@@ -191,21 +198,11 @@ fun LoginScreen(
             //log in button
             Button(
                 onClick = { viewModel.login() },
-                //enabled = !state.isLoading,
                 enabled = !state.isLoading && isLoginFormFilled,
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = BrandBlue,
-                    contentColor = MaterialTheme.colorScheme.onPrimary,
-                    //disabledContainerColor = BrandBlue.copy(alpha = 0.55f),
-                    disabledContainerColor = BrandBlue.copy(alpha = 0.48f),
-                    //makes the disabled state look like a faded version of the same blue button.
-                    //That keeps it visually consistent when isLoading is true.
-                    //disabledContentColor = MaterialTheme.colorScheme.onPrimary
-                    disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.85f)
-                ),
                 modifier = Modifier.weight(1f)
             ) {
+                // the button changes text to show it is logging in
                 Text(
                     text = if (state.isLoading) "Logging in..." else "Log In",
                     style = MaterialTheme.typography.labelLarge

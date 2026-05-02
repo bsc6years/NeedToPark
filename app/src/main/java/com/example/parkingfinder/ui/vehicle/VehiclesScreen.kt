@@ -203,7 +203,9 @@ fun VehiclesRoute(
                     doc.toObject(Vehicle::class.java)?.copy(id = doc.id)
                 }
             }
-            .addOnFailureListener {
+            .addOnFailureListener { exception ->
+                //will show if any Firestore rules are blocking access
+                println("Failed to load vehicles: ${exception.message}")
                 // If Firestore fails, keep the list empty for now.
                 vehicles = emptyList()
             }
